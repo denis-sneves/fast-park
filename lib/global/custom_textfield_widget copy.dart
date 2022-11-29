@@ -1,4 +1,7 @@
+// ignore: duplicate_ignore
 // ignore: file_names
+// ignore_for_file: file_names
+
 import 'package:fast_park/themes/colors.dart' show AppColors;
 import 'package:flutter/material.dart';
 

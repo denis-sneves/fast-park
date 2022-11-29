@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class VeiculosModel {
   String title;
   String data;

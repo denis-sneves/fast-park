@@ -1,14 +1,15 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:fast_park/shared/models/user_model.dart';
 import 'package:http/http.dart' as http;
 
 import '../../constants/routes.dart';
 
 var url = Uri.parse(Routes().signIn());
 
-class AuthApiClient {
-  Future<Map<String, dynamic>?> login(
+class AuthClient {
+  Future<User> login(
     String email,
     String password,
   ) async {
@@ -23,11 +24,15 @@ class AuthApiClient {
       ),
     );
     if (response.statusCode == 200) {
-      final body = jsonDecode((const Utf8Codec().decode(response.bodyBytes)));
       Map<String, dynamic> mapResponse =
           jsonDecode((const Utf8Codec().decode(response.bodyBytes)));
-      print(mapResponse);
-      return mapResponse;
+      Map<String, dynamic>? json = mapResponse;
+      return User.fromJson(json);
+    } else {
+      Map<String, dynamic> mapResponse =
+          jsonDecode((const Utf8Codec().decode(response.bodyBytes)));
+      Map<String, dynamic>? json = mapResponse;
+      return User.fromJson(json);
     }
   }
 }

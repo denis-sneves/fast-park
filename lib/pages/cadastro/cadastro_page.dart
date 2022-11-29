@@ -1,10 +1,9 @@
 import 'package:fast_park/global/custom_textfield_widget%20copy.dart';
 import 'package:fast_park/global/email_textfield_widget.dart';
-import 'package:fast_park/pages/cadastro/cadastro_service.dart';
+import 'package:fast_park/shared/service/cadastro_service.dart';
 import 'package:fast_park/pages/login/login_page.dart';
 import 'package:fast_park/themes/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import '../../global/custom_password_widget.dart';
 
@@ -126,7 +125,7 @@ class _CadastroPageState extends State<CadastroPage> {
         _passwordInputController.text,
       );
     } else {
-      print("invalido");
+      debugPrint("invalido");
     }
   }
 }

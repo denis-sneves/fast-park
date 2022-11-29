@@ -38,7 +38,6 @@ dependencies:
   cupertino_icons: ^1.0.2
   http: ^0.13.5
   get_storage: ^2.0.3
-  get: ^4.6.5
 
 
 dev_dependencies:
@@ -80,9 +79,9 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-     - family: Inter
+     - family: TitilliumWeb
        fonts:
-         - asset: assets/font/Inter-Regular.ttf
+         - asset: assets/font/TitilliumWeb-Regular.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

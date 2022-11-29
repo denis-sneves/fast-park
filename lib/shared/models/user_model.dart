@@ -32,13 +32,13 @@ class User {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['kind'] = kind;
-    data['localId'] = this.localId;
+    data['localId'] = localId;
     data['email'] = email;
-    data['displayName'] = this.displayName;
+    data['displayName'] = displayName;
     data['idToken'] = idToken;
     data['registered'] = registered;
-    data['refreshToken'] = this.refreshToken;
-    data['expiresIn'] = this.expiresIn;
+    data['refreshToken'] = refreshToken;
+    data['expiresIn'] = expiresIn;
     return data;
   }
 }

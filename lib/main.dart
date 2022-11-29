@@ -1,4 +1,3 @@
-import 'package:fast_park/pages/index/index_pages.dart/home_page.dart';
 import 'package:fast_park/pages/initial/initial_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,7 +21,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: Colors.white,
-        fontFamily: "Inter",
+        fontFamily: "TitilliumWeb",
       ),
       home: const InitialPage(),
     );

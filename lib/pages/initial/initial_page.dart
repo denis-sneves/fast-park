@@ -1,13 +1,37 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:fast_park/pages/login/login_page.dart';
+import 'package:fast_park/shared/models/user_model.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 
 import '../../themes/colors.dart';
+import '../index/index_page.dart';
 
 class InitialPage extends StatelessWidget {
   const InitialPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final box = GetStorage('app');
+    var user;
+    // ignore: unused_local_variable
+    User usuario = User();
+
+    Object verifyAuth() {
+      user = box.read('auth');
+      if (user != null) {
+        return Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (BuildContext context) => const IndexPage()),
+            ModalRoute.withName('/'));
+      } else {
+        return Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const LoginPage()));
+      }
+    }
+
     return Scaffold(
       backgroundColor: AppColors.primary,
       body: Stack(
@@ -39,11 +63,7 @@ class InitialPage extends StatelessWidget {
                           fontWeight: FontWeight.bold),
                     ),
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const LoginPage()),
-                      );
+                      verifyAuth();
                     }),
               ),
             ),

@@ -1,4 +1,4 @@
-import 'package:fast_park/pages/index/index_pages.dart/veiculos_model.dart';
+import 'package:fast_park/pages/login/login_page.dart';
 import 'package:fast_park/shared/models/user_model.dart';
 import 'package:fast_park/themes/colors.dart';
 import 'package:flutter/material.dart';
@@ -32,17 +32,18 @@ class _IndexPageState extends State<IndexPage> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60.0),
         child: AppBar(
+          elevation: 10,
           title: Image.asset(
             "assets/images/fastpark_letreiro.png",
             width: 80,
             height: 80,
           ),
-          actions: [
+          actions: const [
             Padding(
               padding: EdgeInsets.all(8.0),
               child: Center(
                 child: Text(
-                  usuario.email!,
+                  "Denis Park",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
                 ),
               ),
@@ -54,12 +55,19 @@ class _IndexPageState extends State<IndexPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               IconButton(
-                icon: const Icon(
-                  Icons.logout,
-                  color: Colors.red,
-                ),
-                onPressed: () {},
-              ),
+                  icon: const Icon(
+                    Icons.logout,
+                    color: Colors.red,
+                  ),
+                  onPressed: () {
+                    box.erase();
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                const LoginPage()),
+                        ModalRoute.withName('/'));
+                  }),
             ],
           ),
           backgroundColor: AppColors.primary,
@@ -153,9 +161,7 @@ class ConfiguracoesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(child: Text("Configuraçôes")),
-    );
+    return const Center(child: Text("Configuraçôes"));
   }
 }
 
@@ -166,8 +172,6 @@ class UsuarioPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(child: Text("Usuário")),
-    );
+    return const Center(child: Text("Usuário"));
   }
 }

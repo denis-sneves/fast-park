@@ -1,14 +1,16 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:fast_park/global/custom_password_widget.dart';
 import 'package:fast_park/global/email_textfield_widget.dart';
 import 'package:fast_park/pages/cadastro/cadastro_page.dart';
 import 'package:fast_park/pages/index/index_page.dart';
 import 'package:fast_park/pages/initial/initial_page.dart';
-import 'package:fast_park/shared/repository/repository_login.dart';
 import 'package:fast_park/themes/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 
 import '../../shared/models/user_model.dart';
+import '../../shared/service/login_service.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -22,9 +24,10 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _passwordInputController =
       TextEditingController();
   final box = GetStorage('app');
-  AuthRepository repository = AuthRepository();
+  AuthClient auth = AuthClient();
   User usuario = User();
   final _formKey = GlobalKey<FormState>();
+  bool _isLoading = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,23 +83,31 @@ class _LoginPageState extends State<LoginPage> {
                         Padding(
                           padding: const EdgeInsets.only(
                               top: 20.0, left: 15, right: 15),
-                          child: SizedBox(
-                            width: 375,
-                            height: 50,
-                            child: TextButton(
-                                style: ButtonStyle(
-                                    backgroundColor: MaterialStateProperty.all(
-                                        Colors.white)),
-                                child: const Text(
-                                  'Login',
-                                  style: TextStyle(
-                                      color: AppColors.secondary,
-                                      fontWeight: FontWeight.bold),
+                          child: _isLoading
+                              ? SizedBox(
+                                  width: 375,
+                                  height: 50,
+                                  child: TextButton(
+                                      style: ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStateProperty.all(
+                                                  Colors.white)),
+                                      child: const Text(
+                                        'Login',
+                                        style: TextStyle(
+                                            color: AppColors.secondary,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          loginUser();
+                                        });
+                                      }),
+                                )
+                              : const CircularProgressIndicator(
+                                  color: Colors.white,
+                                  strokeWidth: 5,
                                 ),
-                                onPressed: () {
-                                  loginUser();
-                                }),
-                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(
@@ -151,23 +162,29 @@ class _LoginPageState extends State<LoginPage> {
 
   void loginUser() async {
     if (_formKey.currentState!.validate()) {
+      _isLoading = false;
       try {
-        usuario = (await repository.login(
+        usuario = (await auth.login(
             _mailInputController.text, _passwordInputController.text));
-        if (usuario.registered == true) {
-          box.write('auth', usuario.toJson());
-          print(usuario.email);
-          // ignore: use_build_context_synchronously
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const IndexPage()),
-          );
-        } else {
-          print("usuario ou senha invalido");
-        }
-      } on Exception catch (_) {}
-    } else {
-      print("invalido");
+        setState(() {
+          if (usuario.registered == true) {
+            box.write('auth', usuario.toJson());
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) => const IndexPage()),
+                ModalRoute.withName('/'));
+          } else {
+            print("Usuário ou senha invalido");
+            _isLoading = true;
+          }
+        });
+      } on Exception catch (e) {
+        print(e);
+        setState(() {
+          _isLoading = true;
+        });
+      }
     }
   }
 }
