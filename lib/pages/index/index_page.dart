@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:fast_park/pages/login/login_page.dart';
 import 'package:fast_park/shared/models/user_model.dart';
 import 'package:fast_park/themes/colors.dart';
@@ -38,13 +40,14 @@ class _IndexPageState extends State<IndexPage> {
             width: 80,
             height: 80,
           ),
-          actions: const [
+          actions: [
             Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Center(
                 child: Text(
-                  "Denis Park",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                  usuario.displayName!,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 14),
                 ),
               ),
             )
@@ -60,13 +63,76 @@ class _IndexPageState extends State<IndexPage> {
                     color: Colors.red,
                   ),
                   onPressed: () {
-                    box.erase();
-                    Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                const LoginPage()),
-                        ModalRoute.withName('/'));
+                    showDialog<String>(
+                        context: context,
+                        builder: (BuildContext context) => SizedBox(
+                              child: BackdropFilter(
+                                filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                                child: AlertDialog(
+                                    content: const Text(
+                                      'Tem certeza que deseja sair?',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    actions: <Widget>[
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          SizedBox(
+                                            width: 100,
+                                            height: 40,
+                                            child: TextButton(
+                                              style: TextButton.styleFrom(
+                                                side: const BorderSide(
+                                                    width: 2,
+                                                    color: AppColors.secondary),
+                                              ),
+                                              child: const Text(
+                                                'Cancelar',
+                                                style: TextStyle(
+                                                    color: AppColors.secondary,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              onPressed: () => Navigator.pop(
+                                                  context, 'Cancel'),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 100,
+                                            height: 40,
+                                            child: TextButton(
+                                              style: TextButton.styleFrom(
+                                                side: const BorderSide(
+                                                    width: 2,
+                                                    color: Colors.red),
+                                              ),
+                                              child: const Text(
+                                                'Sim',
+                                                style: TextStyle(
+                                                    color: Colors.red,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              onPressed: () {
+                                                box.erase();
+                                                Navigator.pushAndRemoveUntil(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (BuildContext
+                                                                context) =>
+                                                            const LoginPage()),
+                                                    ModalRoute.withName('/'));
+                                              },
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    ]),
+                              ),
+                            ));
                   }),
             ],
           ),

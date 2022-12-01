@@ -1,3 +1,4 @@
+import 'package:fast_park/pages/index/index_pages.dart/form_page.dart';
 import 'package:fast_park/pages/index/index_pages.dart/veiculos_model.dart';
 import 'package:fast_park/themes/colors.dart';
 import 'package:flutter/material.dart';
@@ -153,7 +154,8 @@ class VeiculosPage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Add your onPressed code here!
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const FormPageCar()));
         },
         backgroundColor: AppColors.secondary,
         child: const Icon(Icons.add_box_outlined),

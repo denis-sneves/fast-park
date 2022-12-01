@@ -120,10 +120,8 @@ class _CadastroPageState extends State<CadastroPage> {
 
   void _doSignUp() {
     if (_formKey.currentState!.validate()) {
-      CadastroService().signUp(
-        _mailInputController.text,
-        _passwordInputController.text,
-      );
+      CadastroService().signUp(_mailInputController.text,
+          _passwordInputController.text, _nameInputController.text, context);
     } else {
       debugPrint("invalido");
     }

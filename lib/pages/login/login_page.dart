@@ -175,12 +175,38 @@ class _LoginPageState extends State<LoginPage> {
                     builder: (BuildContext context) => const IndexPage()),
                 ModalRoute.withName('/'));
           } else {
-            print("Usuário ou senha invalido");
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              content: Text(
+                "Falha na autenticação",
+                style: TextStyle(
+                  color: Colors.red,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              backgroundColor: Colors.white,
+              duration: Duration(seconds: 1),
+              behavior: SnackBarBehavior.floating,
+              margin: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+            ));
             _isLoading = true;
           }
         });
       } on Exception catch (e) {
-        print(e);
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text(
+            "Erro de conexão com o servidor",
+            style: TextStyle(
+              color: Colors.red,
+              fontWeight: FontWeight.bold,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          backgroundColor: Colors.white,
+          duration: Duration(seconds: 1),
+          behavior: SnackBarBehavior.floating,
+          margin: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+        ));
         setState(() {
           _isLoading = true;
         });
