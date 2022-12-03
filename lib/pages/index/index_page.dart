@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:fast_park/pages/index/index_pages.dart/user_page.dart';
 import 'package:fast_park/pages/login/login_page.dart';
 import 'package:fast_park/shared/models/user_model.dart';
 import 'package:fast_park/themes/colors.dart';
@@ -144,7 +145,6 @@ class _IndexPageState extends State<IndexPage> {
         children: const [
           HomePage(),
           VeiculosPage(),
-          ConfiguracoesPage(),
           UsuarioPage(),
         ],
       ),
@@ -163,7 +163,7 @@ class _IndexPageState extends State<IndexPage> {
           borderRadius: BorderRadius.circular(5),
         ),
         child: ListView.builder(
-          itemCount: 4,
+          itemCount: 3,
           scrollDirection: Axis.horizontal,
           padding: EdgeInsets.symmetric(horizontal: size.width * .024),
           itemBuilder: (context, index) => InkWell(
@@ -187,8 +187,8 @@ class _IndexPageState extends State<IndexPage> {
                     right: size.width * .0422,
                     left: size.width * .0422,
                   ),
-                  width: size.width * .128,
-                  height: index == currentIndex ? size.width * .014 : 0,
+                  width: size.width * .201,
+                  height: index == currentIndex ? size.width * .019 : 0,
                   decoration: const BoxDecoration(
                     color: AppColors.secondary,
                     borderRadius: BorderRadius.vertical(
@@ -198,7 +198,7 @@ class _IndexPageState extends State<IndexPage> {
                 ),
                 Icon(
                   listOfIcons[index],
-                  size: size.width * .076,
+                  size: size.width * .085,
                   color: index == currentIndex
                       ? AppColors.secondary
                       : Colors.white,
@@ -215,29 +215,6 @@ class _IndexPageState extends State<IndexPage> {
   List<IconData> listOfIcons = [
     Icons.home_rounded,
     Icons.car_rental,
-    Icons.settings_rounded,
     Icons.person_rounded,
   ];
-}
-
-class ConfiguracoesPage extends StatelessWidget {
-  const ConfiguracoesPage({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(child: Text("Configuraçôes"));
-  }
-}
-
-class UsuarioPage extends StatelessWidget {
-  const UsuarioPage({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(child: Text("Usuário"));
-  }
 }

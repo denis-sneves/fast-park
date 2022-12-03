@@ -1,8 +1,6 @@
 import 'package:fast_park/global/car_textfield_widget.dart';
 import 'package:fast_park/themes/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class FormPageCar extends StatefulWidget {
   const FormPageCar({super.key});
@@ -21,6 +19,7 @@ class _FormPageCarState extends State<FormPageCar> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60.0),
@@ -49,12 +48,12 @@ class _FormPageCarState extends State<FormPageCar> {
                     children: [
                       CarTextField(
                         controller: _placaInputController,
-                        formWidth: 170,
+                        formWidth: size.width * 0.42,
                         label: "Placa",
                       ),
                       CarTextField(
                         controller: _placaInputController,
-                        formWidth: 170,
+                        formWidth: size.width * 0.42,
                         label: "Placa",
                       )
                     ],
@@ -65,12 +64,12 @@ class _FormPageCarState extends State<FormPageCar> {
                     children: [
                       CarTextField(
                         controller: _modeloInputController,
-                        formWidth: 170,
+                        formWidth: size.width * 0.42,
                         label: "Marca/Modelo",
                       ),
                       CarTextField(
                         controller: _corInputController,
-                        formWidth: 170,
+                        formWidth: size.width * 0.42,
                         label: "Cor",
                       )
                     ],
@@ -81,7 +80,7 @@ class _FormPageCarState extends State<FormPageCar> {
                     children: [
                       CarTextField(
                         controller: _tabelaInputController,
-                        formWidth: 361,
+                        formWidth: size.width * 0.92,
                         label: "Tabela",
                       ),
                     ],
@@ -128,7 +127,7 @@ class _FormPageCarState extends State<FormPageCar> {
                     children: [
                       CarTextField(
                         controller: _observacoesInputController,
-                        formWidth: 361,
+                        formWidth: size.width * 0.92,
                         label: "Observações",
                       ),
                     ],

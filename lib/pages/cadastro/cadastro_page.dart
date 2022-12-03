@@ -1,4 +1,4 @@
-import 'package:fast_park/global/custom_textfield_widget%20copy.dart';
+import 'package:fast_park/global/custom_textfield_widget.dart';
 import 'package:fast_park/global/email_textfield_widget.dart';
 import 'package:fast_park/shared/service/cadastro_service.dart';
 import 'package:fast_park/pages/login/login_page.dart';

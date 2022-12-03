@@ -192,7 +192,7 @@ class _LoginPageState extends State<LoginPage> {
             _isLoading = true;
           }
         });
-      } on Exception catch (e) {
+      } on Exception catch (_) {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text(
             "Erro de conexão com o servidor",
